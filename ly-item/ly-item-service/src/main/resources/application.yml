@@ -1,0 +1,25 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: item-service
+  datasource:
+    #driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.2.143:3306/yun6
+    username: root
+    password: 123456
+    hikari:
+      connection-timeout: 60000
+      maximum-pool-size: 30
+      minimum-idle: 10
+mybatis:
+  #type-aliases-package: com.leyou.item.pojo
+  #configuration:
+    #log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+logging:
+  level:
+    com.leyou: debug
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
