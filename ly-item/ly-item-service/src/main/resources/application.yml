@@ -5,7 +5,7 @@ spring:
     name: item-service
   datasource:
     #driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.2.143:3306/yun6
+    url: jdbc:mysql://192.168.1.136:3306/yun6
     username: root
     password: 123456
     hikari:
