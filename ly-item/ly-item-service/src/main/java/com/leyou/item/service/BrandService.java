@@ -25,6 +25,7 @@ import java.util.List;
  */
 @Service
 public class BrandService {
+
     @Autowired
     private BrandMapper brandMapper;
 
@@ -46,11 +47,19 @@ public class BrandService {
         // 查询
         List<Brand> list = brandMapper.selectByExample(example);
         // 返回结果
-        if (CollectionUtils.isEmpty(list)){
+        if (CollectionUtils.isEmpty(list)) {
             throw new LyException(ExceptionEnum.BRAND_NOT_FOUND);
         }
         PageInfo<Brand> info = new PageInfo<>(list);
         return new PageResult<>(info.getTotal(), list);
+    }
+
+    public Brand queryById(Long id){
+        Brand brand = brandMapper.selectByPrimaryKey(id);
+        if (brand == null){
+            throw new LyException(ExceptionEnum.BRAND_NOT_FOUND);
+        }
+        return brand;
     }
 
 }
