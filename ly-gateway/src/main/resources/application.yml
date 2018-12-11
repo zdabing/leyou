@@ -15,20 +15,21 @@ zuul:
   #  - consumer-service    去除不需要暴露的服务
   routes:
     item-service: /item/**
+    search-service: /search/**
     upload-service:
       path: /upload/**
       serviceId: upload-service
       strip-prefix: false
 ribbon:
-  ConnectTimeout: 1000 # 连接超时时间(ms)
-  ReadTimeout: 3500 # 通信超时时间(ms)
-  #OkToRetryOnAllOperations: true # 是否对所有操作重试
-  MaxAutoRetriesNextServer: 0 # 同一服务不同实例的重试次数
-  MaxAutoRetries: 0 # 同一实例的重试次数
+  ConnectTimeout: 350 # 连接超时时间(ms)
+  ReadTimeout: 10000 # 通信超时时间(ms)
+#  OkToRetryOnAllOperations: true # 是否对所有操作重试
+#  MaxAutoRetriesNextServer: 0 # 同一服务不同实例的重试次数
+#  MaxAutoRetries: 0 # 同一实例的重试次数
 hystrix:
   command:
     default:
       execution:
         isolation:
           thread:
-            timeoutInMillisecond: 5000 # 熔断超时时长：5000ms
+            timeoutInMilliseconds: 20000 # 熔断超时时长：6000ms

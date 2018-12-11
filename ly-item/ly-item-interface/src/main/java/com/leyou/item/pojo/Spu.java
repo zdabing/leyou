@@ -3,11 +3,11 @@ package com.leyou.item.pojo;
 import lombok.Data;
 import tk.mybatis.mapper.annotation.KeySql;
 
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Table(name = "tb_spu")
@@ -26,9 +26,13 @@ public class Spu {
     private Date createTime;// 创建时间
     private Date lastUpdateTime;// 最后修改时间
 
+    // 下面是数据库中没有的数据，本来是要放在vo中
+    @Transient // 定该属性或字段不是永久的
+    private String cname;// 商品分类名称
     @Transient
-    private String cname;
-
+    private String bname;// 品牌名称
     @Transient
-    private String bname;
+    private List<Sku> skus;
+    @Transient
+    private SpuDetail spuDetail;
 }

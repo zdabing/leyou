@@ -57,7 +57,7 @@ public class UploadService {
             return properties.getBaseUrl() + storePath.getFullPath();
         } catch (IOException e) {
             log.error("上传文件失败", e);
-            throw new LyException(ExceptionEnum.FILE_UPLOAD_ERROR);
+            throw new LyException(ExceptionEnum.UPLOAD_FILE_ERROR);
         }
     }
 }

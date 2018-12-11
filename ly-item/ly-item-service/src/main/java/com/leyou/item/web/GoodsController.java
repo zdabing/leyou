@@ -1,18 +1,17 @@
 package com.leyou.item.web;
 
 import com.leyou.common.vo.PageResult;
-import com.leyou.item.pojo.Brand;
+import com.leyou.item.pojo.Sku;
 import com.leyou.item.pojo.Spu;
+import com.leyou.item.pojo.SpuDetail;
 import com.leyou.item.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("spu")
 public class GoodsController {
 
     @Autowired
@@ -27,7 +26,7 @@ public class GoodsController {
      * @param key
      * @return
      */
-    @GetMapping("page")
+    @GetMapping("spu/page")
     public ResponseEntity<PageResult<Spu>> queryBrandByPage(
             @RequestParam(value = "page", defaultValue = "1") Integer page,
             @RequestParam(value = "rows", defaultValue = "5") Integer rows,
@@ -35,5 +34,30 @@ public class GoodsController {
             @RequestParam(value = "key", required = false) String key) {
         PageResult<Spu> result = goodsService.queryGoodsByPage(page, rows, saleable, key);
         return ResponseEntity.ok(result);
+    }
+
+    /**
+     * 根据spu的id查询详情detail
+     * @param id
+     * @return
+     */
+    @GetMapping("spu/detail/{id}")
+    public ResponseEntity<SpuDetail> queryDetailById(@PathVariable("id") Long id){
+        return ResponseEntity.ok(goodsService.querySpuDetailByid(id));
+    }
+
+    /**
+     * 根据spu查询下面的所有的sku
+     * @param id
+     * @return
+     */
+    @GetMapping("sku/list")
+    public ResponseEntity<List<Sku>> querySkuList(@RequestParam("id") Long id){
+        return ResponseEntity.ok(goodsService.querySkusBySpuId(id));
+    }
+
+    @GetMapping("spu/{id}")
+    public ResponseEntity<Spu> querySpuById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(goodsService.querySpuByid(id));
     }
 }

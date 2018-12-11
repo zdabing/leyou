@@ -5,11 +5,12 @@ spring:
     name: item-service
   datasource:
     #driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.1.136:3306/yun6
+    url: jdbc:mysql://193.112.12.200:3306/leyou
+#    url: jdbc:mysql://192.168.2.102:3306/yun6
     username: root
-    password: 123456
+    password: leyou
     hikari:
-      connection-timeout: 60000
+      connection-timeout: 6000
       maximum-pool-size: 30
       minimum-idle: 10
 mybatis:
